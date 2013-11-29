@@ -9,6 +9,7 @@ from app import app, db, lm, oid
 from forms import LoginForm, EditForm, PostForm, SearchForm
 from models import User, ROLE_USER, Post
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
+from emails import follower_notification
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -124,6 +125,7 @@ def internal_error(error):
     return render_template('500.html'), 500
 
 @app.route('/follow/<nickname>')
+@login_required
 def follow(nickname):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:
@@ -139,11 +141,13 @@ def follow(nickname):
     db.session.add(u)
     db.session.commit()
     flash('You are now following %s!' % nickname)
+    follower_notification(user, g.user)
     return redirect(url_for('user', nickname=nickname))
 
 @app.route('/unfollow/<nickname>')
+@login_required
 def unfollow(nickname):
-    user = User.query.filter(nickname=nickname).first()
+    user = User.query.filter_by(nickname=nickname).first()
     if user is None:
         flash('User %s not found' % nickname)
         return redirect(url_for('index'))
@@ -166,7 +170,7 @@ def search():
         return redirect(url_for('index'))
     return redirect(url_for('search_results', query=g.search_form.search.data))
 
-@app.route('search_results/<query>')
+@app.route('/search_results/<query>')
 @login_required
 def search_results(query):
     results = Post.query.whoosh_search(query, MAX_SEARCH_RESULTS).all()
