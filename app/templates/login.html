@@ -22,7 +22,7 @@ function set_openid(openid, pr)
     <div class="help-block">Click on your OpenID provider below:</div>
     <div class="control-group">
       {% for pr in providers %}
-      <a class="btn btn-default" href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');"><i class="fa fa-{{pr.name}}"></i>{{pr.name}}</a> |
+      <a class="btn btn-default" href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');"><i class="{{pr.icon}}"></i> {{pr.name}}</a> |
       {% endfor %}
     </div>
     <div class="control-group{% if form.errors.openid %} error {% endif %}">

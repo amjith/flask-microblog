@@ -32,11 +32,14 @@ MAIL_PASSWORD = get_env_setting('GMAIL_PASSWD')
 ADMINS = ['amjith.r@gmail.com']
 
 OPENID_PROVIDERS = [
-    {'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'},
-    {'name': 'Yahoo', 'url': 'https://me.yahoo.com'},
-    {'name': 'AOL', 'url': 'http://openid.aol.com/<username>'},
-    {'name': 'Flickr', 'url': 'http://www.flickr.com/<username>'},
-    {'name': 'OpenID', 'url': 'https://www.myopenid.com'}
+    {'icon': 'fa fa-google-plus', 'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'},
+    #{'icon': 'icon-google', 'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'},
+    #{'icon': 'icon-gplus-squared', 'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'},
+    {'icon': 'icon-yahoo', 'name': 'Yahoo', 'url': 'https://me.yahoo.com'},
+    {'icon': 'icon-aim', 'name': 'AOL', 'url': 'http://openid.aol.com/<username>'},
+    #{'icon': 'fa fa-flickr', 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>'},
+    {'icon': 'icon-flickr-1', 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>'},
+    {'icon': 'icon-openid', 'name': 'OpenID', 'url': 'https://www.myopenid.com'}
 ]
 
 POSTS_PER_PAGE = 3
